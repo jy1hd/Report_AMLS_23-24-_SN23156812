@@ -1,0 +1,70 @@
+import numpy as np
+from sklearn.metrics import accuracy_score,confusion_matrix,recall_score,f1_score
+
+from medmnist import PneumoniaMNIST
+
+train_dt=PneumoniaMNIST(split="train",download=True)
+test_dt=PneumoniaMNIST(split="test",download=True)
+val_dt=PneumoniaMNIST(split="val",download=True)
+
+train_img,train_lbl=train_dt.imgs,train_dt.labels
+test_img,test_lbl=test_dt.imgs,test_dt.labels
+val_img,val_lbl=val_dt.imgs,val_dt.labels
+# Convert image data to a two-dimensional array
+train_images = train_img.reshape((4708, 28 * 28))
+test_images = test_img.reshape((624, 28 * 28))
+val_images = val_img.reshape((524, 28 * 28))
+
+# Convert labels to 1D array
+train_labels = train_lbl.ravel()
+test_labels = test_lbl.ravel()
+val_labels = val_lbl.ravel()
+
+# MLP
+
+
+
+from sklearn.neural_network import MLPClassifier
+from sklearn.model_selection import GridSearchCV
+
+mlp = MLPClassifier(max_iter=1000)
+parameter_space = {
+    'hidden_layer_sizes': [(50, 50, 50), (50, 100, 50), (100,)],
+    'activation': ['tanh', 'relu'],
+    'solver': ['sgd', 'adam'],
+    'alpha': [0.0001, 0.05],
+    'learning_rate': ['constant', 'adaptive'],
+}
+
+clf = GridSearchCV(mlp, parameter_space, n_jobs=-1, cv=3)
+clf.fit(train_images, train_labels)
+
+
+clf.fit(train_images, train_labels)
+
+# Retrain the model on the full training set using optimal parameters
+best_params = clf.best_params_
+mlp_best = MLPClassifier(max_iter=1000, **best_params)
+mlp_best.fit(train_images, train_labels)
+
+# Evaluate the model on an independent validation set
+
+
+val_predictions = mlp_best.predict(val_images)
+val_accuracy = accuracy_score(val_labels, val_predictions)
+print("Validation Accuracy:", val_accuracy)
+
+
+# Evaluate the final selected model on the test set
+test_predictions = mlp_best.predict(test_images)
+test_accuracy = accuracy_score(test_labels, test_predictions)
+print("Test Accuracy:", test_accuracy)
+
+
+
+print(f"The confusion matrix is:{confusion_matrix(test_labels, test_predictions)}")
+print(f"The F1 score is {f1_score(test_labels, test_predictions):.2%}")
+print(f"The Recall Rate is {recall_score(test_labels, test_predictions):.2%}")
+
+
+print(f"The best parameters are: {best_params}")
