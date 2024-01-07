@@ -33,7 +33,7 @@ test_labels = test_lbl.ravel()
 val_labels = val_lbl.ravel()
 
 
-# ### MLP
+# ### Build MLP model
 
 # In[3]:
 
@@ -57,15 +57,13 @@ clf.fit(train_images, train_labels)
 
 # In[4]:
 
-
-
 # Retrain the model on the full training set using optimal parameters
 best_params = clf.best_params_
 mlp_best = MLPClassifier(max_iter=1000, **best_params)
 mlp_best.fit(train_images, train_labels)
 
-#  Evaluate the model on an independent validation set
 
+#  Evaluate the model on an independent validation set
 
 val_predictions = mlp_best.predict(val_images)
 val_accuracy = accuracy_score(val_labels, val_predictions)
@@ -86,7 +84,7 @@ print(f"The F1 score is {f1_score(test_labels,test_predictions):.2%}")
 print(f"The Recall Rate is {recall_score(test_labels,test_predictions):.2%}")
 
 
-# draw 
+# draw confusion matrix
 
 import matplotlib.pyplot as plt
 import seaborn as sns
