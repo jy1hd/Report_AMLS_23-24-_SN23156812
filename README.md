@@ -6,10 +6,11 @@ How to use main.py :
 	If you want to use CNN_RF (Folder B),just input command "python main.py --comparison_type=CNN_RF"
 
 The packages required to run the code:
-Medmnist
-numpy
-PIL(Pillow)
-torch (Pytorch)
-torchvision
-tensorboardX
-tqdm
+
+1.Medmnist
+2.numpy
+3.PIL(Pillow)
+4.torch (Pytorch)
+5.torchvision
+6.tensorboardX
+7.tqdm
