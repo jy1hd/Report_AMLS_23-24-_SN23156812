@@ -254,7 +254,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 rf = RandomForestClassifier()
 param_grid = {
-    'n_estimators': [20, 100],
+    'n_estimators': [20, 25, 30],
     'max_features': [ 'sqrt', 'log2'],
     'max_depth' : [8,9,10,11,12],
     'criterion' :['gini', 'entropy']
