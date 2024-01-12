@@ -16,3 +16,5 @@ How to use main.py :
 5.torchvision
 6.tensorboardX
 7.tqdm
+
+·Folder A stores the model code (MLP and CNN models) of the PnemoniaMNIST data set, and Folder B stores the test model code (CNN and RF) of the PathMNIST data set.
