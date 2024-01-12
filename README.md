@@ -18,3 +18,4 @@ How to use main.py :
 7.tqdm
 
 ·Folder A stores the model code (MLP and CNN models) of the PnemoniaMNIST data set, and Folder B stores the test model code (CNN and RF) of the PathMNIST data set.
+（When running the Random Forest model of Folder B, the fit operation takes a while because the CPU is used instead of the GPU, and the data set is a bit large, so you need to wait for a while.）
