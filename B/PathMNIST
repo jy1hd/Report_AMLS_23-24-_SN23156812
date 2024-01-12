@@ -226,6 +226,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 
+
+print("This process is a bit slow, please wait for a while, thanks!")
+
 # 1. Load and preprocess the data
 train_data = PathMNIST(split='train', download=True)
 test_data = PathMNIST(split='test', download=True)
