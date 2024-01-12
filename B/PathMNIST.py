@@ -1,4 +1,4 @@
-# define CNN
+# CNN model
 
 
 from medmnist import PathMNIST
@@ -172,12 +172,12 @@ for epoch in range(100):  # let's train for 100 epochs
         f'Epoch {epoch + 1:02d}, Train Loss: {train_loss:.4f}, Train Accuracy: {train_accuracy.accuracy:.2f}%, Validation Accuracy: {val_accuracy.accuracy:.2f}%')
 
 # Save the state dictionary of the model
-
 torch.save(model.state_dict(), 'CNN_PathMNIST.pth')
 
 # Test the model
 test_accuracy = evaluate(model, test_loader)
 print(f'Test Accuracy: {test_accuracy.accuracy:.2f}%')
+
 # Plotting
 plt.figure(figsize=(12, 6))
 
@@ -197,7 +197,6 @@ plt.title('Training Loss')
 plt.xlabel('Epochs')
 plt.ylabel('Loss')
 plt.legend()
-
 plt.show()
 
 # Get predictions and true labels
@@ -238,14 +237,11 @@ train_images = train_data.imgs
 train_labels = train_data.labels.ravel()
 
 
-
 val_images = val_data.imgs
 val_labels = val_data.labels.ravel()
 
 test_images = test_data.imgs
 test_labels = test_data.labels.ravel()
-
-#
 
 
 train_images = train_images.reshape((-1, 3*28*28))
@@ -266,14 +262,11 @@ param_grid = {
 rf_clf = GridSearchCV(estimator=rf, param_grid=param_grid, cv= 3)
 rf_clf.fit(train_images, train_labels)
 
-
 #
-
 
 best_params = rf_clf.best_params_
 rf_best = RandomForestClassifier(**best_params)
 rf_best.fit(train_images, train_labels)
-
 
 
 val_predictions = rf_best.predict(val_images)
